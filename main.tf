@@ -2,6 +2,10 @@ variable "public_key" {
 	type = string
 }
 
+variable "instance_type" {
+	type = string
+}
+
 terraform {
 	required_providers {
 		aws = {
@@ -124,7 +128,7 @@ resource "aws_eip" "oa_eip" {
 
 resource "aws_instance" "oa_vm" {
 	ami = "ami-09d56f8956ab235b3"
-	instance_type = "t2.micro"
+	instance_type = var.instance_type
 
 	network_interface {
 		network_interface_id = aws_network_interface.oa_nic.id
