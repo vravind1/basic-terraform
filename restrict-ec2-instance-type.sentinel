@@ -2,17 +2,10 @@
 # all existing EC2 instances have instance types from an allowed list
 # Import common-functions/tfstate-functions/tfstate-functions.sentinel
 # with alias "state"
-import "tfplan/v2" as tfplan
+#import "tfplan/v2" as tfplan
 #import "tfplan-functions" as plan
 
-find_resources = func(type) {
-  resources = filter tfplan.resource_changes as address, rc {
-  	rc.type is type and
-  	rc.mode is "managed" and
-  	(rc.change.actions contains "create" or rc.change.actions contains "update" or
-     rc.change.actions contains "read" or (rc.change.actions contains "no-op" and
-     rc.change.after is not null))
-  }
+
 
   return resources
 }# Allowed EC2 Instance Types
@@ -21,11 +14,11 @@ find_resources = func(type) {
 allowed_types = ["t2.micro", "t2.small", "t2.medium", "t2.large"]
 
 # Get all EC2 instances
-allEC2Instances = tfplan.find_resources("aws_instance")
+allEC2Instances = plan.find_resources("aws_instance")
 
 # Filter to EC2 instances with violations
 # Warnings will be printed for all violations since the last parameter is true
-violatingEC2Instances = tfplan.filter_attribute_not_in_list(allEC2Instances,
+violatingEC2Instances = plan.filter_attribute_not_in_list(allEC2Instances,
                         "instance_type", allowed_types, true)
 
 # Main rule
