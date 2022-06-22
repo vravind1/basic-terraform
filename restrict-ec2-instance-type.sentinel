@@ -3,7 +3,7 @@
 # Import common-functions/tfstate-functions/tfstate-functions.sentinel
 # with alias "state"
 import "tfplan/v2" as tfplan
-import "tfplan-functions" as plan
+#import "tfplan-functions" as plan
 
 find_resources = func(type) {
   resources = filter tfplan.resource_changes as address, rc {
