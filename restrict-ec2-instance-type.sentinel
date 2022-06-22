@@ -3,12 +3,11 @@
 # Import common-functions/tfstate-functions/tfstate-functions.sentinel
 # with alias "state"
 #import "tfplan/v2" as tfplan
-#import "tfplan-functions" as plan
+import "tfplan-functions" as plan
 
 
 
-  return resources
-}# Allowed EC2 Instance Types
+
 
 # Include "null" to allow missing or computed values
 allowed_types = ["t2.micro", "t2.small", "t2.medium", "t2.large"]
