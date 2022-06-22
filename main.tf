@@ -1,3 +1,7 @@
+variable "public_key" {
+	type = string
+}
+
 terraform {
 	required_providers {
 		aws = {
@@ -106,7 +110,7 @@ resource "aws_network_interface" "oa_nic" {
 
 resource "aws_key_pair" "oa_kp" {
 	key_name = "oa_key"
-	public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC5WzhjjBBn0Tcacp5yfpZqo3mXAi6m3MlvWKGYQY3XQLOWGHVhXFRnQi3L0OzcqrUZtJLhu+eTV4N8q1XiYgO3O6zjeXCmERNrtvNxaWPzUV44GWS7eE7vDyj7AxGmMzRFwApWhjWNy3jLDfYlm02/VO5AJf0Um5oikW129gCVNO2okT6ghdyLw8yLb57HoZDhLJ9mvgVN3+DnxXE1KGBf0XzFp4zn6cDNaK2D8OVVttB3SCPBLXc/IMScQD7iUIgKQX4+wT6MZ/Z8eqa2nNYgAc3ndtDgUMjWqBKs8zQ4PZLc88rkFZVhemFDvz1cwqSfbFYTSnhfAOj3jqHuerQzjhHwvM1s8CnPkGu6vxNIUZWcdRsziuP9jHmAQx+wuvDM3dSvtMd+vAFK8czAXKqBJHC2GOhQp7GdRsYkZBeIazQZWXhj0DCRowIjRPl2klfOz9nw5sPPc7yQtU8h3DQgsQHcEyW3mIjb/wKpFUWFLFxtUS7aLfUkGeruCoZUtXM= vishnuravindra@vishnuravindra-Y43X3LK2QT"
+	public_key = var.public_key
 }
 
 resource "aws_eip" "oa_eip" {
